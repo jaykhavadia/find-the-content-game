@@ -19,7 +19,7 @@ const NoSkipAd = ({ onClose, duration = 30 }) => {
     <div style={modalStyles}>
       <div
         style={modalContentStyles}
-        className='flex flex-col justify-center items-center'
+        className='flex flex-col justify-center items-center font-[18px] text-black  '
       >
         <h2>Advertisement</h2>
         {/* <script
@@ -27,18 +27,18 @@ const NoSkipAd = ({ onClose, duration = 30 }) => {
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2825016877369969'
           crossorigin='anonymous'
         ></script>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
         <ins
           className='adsbygoogle'
-          style='display:block'
+          style={{ display: "block" }}
           data-ad-client='ca-pub-2825016877369969'
           data-ad-slot='4070965389'
           data-ad-format='auto'
           data-full-width-responsive='true'
         ></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
-
+        {/* <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
         {/* Display the countdown timer */}
-        <p style={{ fontSize: "18px" }}>
+        <p>
           {canClose
             ? "You can now close the ad."
             : `Please wait ${timeLeft} seconds to close.`}
