@@ -17,7 +17,7 @@ const InfiniteAds = ({ onFindContent }) => {
       }
     };
     containerRef.current.addEventListener('scroll', handleScroll);
-    return () => containerRef.current.removeEventListener('scroll', handleScroll);
+    return () => containerRef?.current?.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (

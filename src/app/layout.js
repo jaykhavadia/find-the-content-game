@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/Header";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,9 +28,8 @@ export default function RootLayout({ children }) {
         <div>
           <Header></Header>
         </div>
-        <div className="h-full">
-        {children}
-        </div>
+        <div className='h-full'>{children}</div>
+        <ToastContainer />
       </body>
     </html>
   );

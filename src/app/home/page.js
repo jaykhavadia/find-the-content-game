@@ -11,9 +11,10 @@ import { redirect } from "next/navigation";
 export default function Home() {
   const [showAdOverlay, setShowAdOverlay] = useState(false);
   const [isCheating, setIsCheating] = useState(false);
+  const [timerVisible, setTimerVisible] = useState(true);
   const handleFindContent = () => {
     if (isCheating) {
-      alert("Bap Say Shanpati nahii");
+      toast.error("Baap Say Shanpati nahii", { autoClose: 3000 });
       closeAd();
       return;
     }
@@ -21,7 +22,7 @@ export default function Home() {
   };
 
   const closeAd = () => {
-    redirect("/");
+    redirect('/');
   };
 
   useEffect(() => {
@@ -29,12 +30,13 @@ export default function Home() {
       if (e.ctrlKey && e.key === "f") {
         e.preventDefault();
         toast.error("NO CHEATING", { autoClose: 3000 });
+        setTimerVisible(false);
         setShowAdOverlay(true);
+        setIsCheating(true);
         setTimeout(() => {
           setShowAdOverlay(false);
           window.location.reload();
         }, 30000); // 30 seconds
-        setIsCheating(true);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -46,7 +48,7 @@ export default function Home() {
       <InfiniteAds onFindContent={handleFindContent} />
 
       <AdGrid />
-      {showAdOverlay && <NoSkipAd onClose={closeAd} duration={3} />}
+      {showAdOverlay && <NoSkipAd onClose={closeAd} duration={3} timerVisible={timerVisible} />}
       <ToastContainer />
     </div>
   );

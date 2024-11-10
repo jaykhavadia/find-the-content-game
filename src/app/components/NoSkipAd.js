@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const NoSkipAd = ({ onClose, duration = 30 }) => {
+const NoSkipAd = ({ onClose, duration = 30, timerVisible = true }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [canClose, setCanClose] = useState(false);
 
@@ -41,7 +41,9 @@ const NoSkipAd = ({ onClose, duration = 30 }) => {
         <p>
           {canClose
             ? "You can now close the ad."
-            : `Please wait ${timeLeft} seconds to close.`}
+            : `${
+                timerVisible ? `Please wait ${timeLeft} seconds to close.` : ""
+              }`}
         </p>
 
         {/* Disable the button until countdown is complete */}
