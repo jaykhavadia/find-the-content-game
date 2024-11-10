@@ -5,12 +5,25 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 import InfiniteAds from "../components/InfiniteAds";
 import AdGrid from "../components/AdGrid";
+import NoSkipAd from "../components/NoSkipAd";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   const [showAdOverlay, setShowAdOverlay] = useState(false);
+  const [isCheating, setIsCheating] = useState(false);
   const handleFindContent = () => {
+    if (isCheating) {
+      alert("Bap Say Shanpati nahii");
+      closeAd();
+      return;
+    }
     alert("Congratulations! You found the content!");
   };
+
+  const closeAd = () => {
+    redirect("/");
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.key === "f") {
@@ -21,6 +34,7 @@ export default function Home() {
           setShowAdOverlay(false);
           window.location.reload();
         }, 30000); // 30 seconds
+        setIsCheating(true);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -29,28 +43,10 @@ export default function Home() {
 
   return (
     <div>
-      {/* <InfiniteAds onFindContent={handleFindContent} /> */}
+      <InfiniteAds onFindContent={handleFindContent} />
 
       <AdGrid />
-      {showAdOverlay && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.9)",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 2000,
-          }}
-        >
-          <h2>Watch this ad for 30 seconds</h2>
-        </div>
-      )}
+      {showAdOverlay && <NoSkipAd onClose={closeAd} duration={3} />}
       <ToastContainer />
     </div>
   );
